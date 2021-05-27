@@ -1,0 +1,16 @@
+{
+  "type": "mongodb",
+  "host": "localhost",
+  "port": 27017,
+  "database": "todolist",
+  "synchronize": true,
+  "logging": false,
+  "entities": ["src/entity/**/*"],
+  "migrations": ["src/migration/**/*"],
+  "subscribers": ["src/subscriber/**/*"],
+  "cli": {
+    "entitiesDir": "src/entity",
+    "migrationsDir": "src/migration",
+    "subscribersDir": "src/subscriber"
+  }
+}
