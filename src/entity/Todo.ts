@@ -1,15 +1,20 @@
-import { Entity, ObjectIdColumn, Column, BaseEntity } from "typeorm";
+import {
+  Entity,
+  ObjectIdColumn,
+  Column,
+  BaseEntity,
+  ObjectID as ObjectIDType,
+} from "typeorm";
 import { ObjectType, Field, ID } from "type-graphql";
-// import { User } from "./User";
 
-import { ObjectID } from "mongodb";
+// import { User } from "./User";
 
 @ObjectType()
 @Entity()
 export class ToDo extends BaseEntity {
   @Field(() => ID)
   @ObjectIdColumn()
-  id: ObjectID;
+  _id: ObjectIDType;
 
   @Field({ nullable: true })
   @Column()
@@ -27,4 +32,11 @@ export class ToDo extends BaseEntity {
   @Column({ default: false })
   IsCompleted: boolean;
 
+  // @Field(() => [String], { nullable: true, defaultValue: [] })
+  // @Column({ default: [] })
+  // shared_by: String[];
+
+  // @Field(() => Comments, { nullable: true })
+  // @Column()
+  // comment: Comments[];
 }
