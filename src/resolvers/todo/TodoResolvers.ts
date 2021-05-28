@@ -17,6 +17,7 @@ import { getMongoRepository } from "typeorm";
 
 import { ObjectID } from "mongodb";
 import { ApolloError } from "apollo-server-express";
+import { User } from "../../entity/User";
 
 @InputType()
 export class CommentToDo {
@@ -62,11 +63,14 @@ export class ToDoResolver {
   ): Promise<ToDo> {
     const todoRepository = getMongoRepository(ToDo);
     let todo = await todoRepository.findOne(id);
-
+    const user = await User.findOne({ _id: new ObjectID(payload!.userId) });
     if (!todo) {
       throw new Error("todo not found");
     }
-    let cmt = new Comment(comment, payload!.userId);
+    if (!user) {
+      throw new Error("user not found");
+    }
+    let cmt = new Comment(comment, user);
     await cmt.save();
 
     await todoRepository.updateOne({ _id: new ObjectID(id) }, [
