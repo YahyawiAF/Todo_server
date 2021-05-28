@@ -137,7 +137,6 @@ export class ToDoResolver {
     const todoRepository = getMongoRepository(ToDo);
     const todo = await todoRepository.findOne(id);
     if (!todo) {
-      7;
       throw new Error("todo not found");
     }
     if (payload?.userId !== todo.user_id) {
