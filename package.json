@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rimraf ./build && tsc -b",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node-dev --no-notify --respawn --transpileOnly src/index.ts"
+    "start": "ts-node-dev --respawn src/index.ts"
   },
   "repository": {
     "type": "git",
