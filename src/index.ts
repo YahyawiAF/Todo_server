@@ -4,12 +4,9 @@ import { createConnection } from "typeorm";
 import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import cookieParser from "cookie-parser";
-import { buildSchema } from "type-graphql";
 import { verify } from "jsonwebtoken";
 
-import { LoginResolver } from "./resolvers/user/login";
-import { RegisterResolver } from "./resolvers/user/register";
-import { ToDoResolver } from "./resolvers/todo/TodoResolvers";
+import { createSchema } from "./utils/createSchema";
 import {
   createRefreshToken,
   sendRefreshToken,
@@ -51,12 +48,10 @@ import { ObjectID } from "mongodb";
   } catch (err) {
     console.log(err);
   }
+  const schema = await createSchema();
 
   const appoloServer = new ApolloServer({
-    schema: await buildSchema({
-      resolvers: [LoginResolver, RegisterResolver, ToDoResolver],
-    }),
-
+    schema,
     context: ({ req, res }) => ({ req, res }),
   });
 
