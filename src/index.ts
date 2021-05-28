@@ -17,6 +17,7 @@ import {
 } from "./types/auth";
 
 import { User } from "./entity/User";
+import { ObjectID } from "mongodb";
 
 (async () => {
   const app = express();
@@ -35,7 +36,7 @@ import { User } from "./entity/User";
       console.log(err);
       return res.send({ ok: false, accessToken: "" });
     }
-    const user = await User.findOne({ id: payload.userId });
+    const user = await User.findOne({ _id: new ObjectID(payload?.userId) });
     if (!user) {
       return res.send({ ok: false, accessToken: "" });
     }

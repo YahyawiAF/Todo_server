@@ -34,10 +34,4 @@ export class User extends BaseEntity {
 
   @Column()
   password: string;
-
-  // @OneToMany(() => ToDo, (todo: ToDo) => todo.user, {
-  //   onDelete: "CASCADE",
-  //   onUpdate: "CASCADE",
-  // })
-  // todos: Promise<ToDo[]>;
 }
